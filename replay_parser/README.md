@@ -11,12 +11,12 @@ one of my older replays (2018) is missing the first turn of the first day for so
 
 ### types
 
-s:5:"units" = s for string, 5 is length of string excluding quotation marks, then the string in quotation
-i:8000 = integer with value 8000
-d:4.4000000000000004 = 64 bit float
-O:8:"awbwUnit":25:{ = object with 8 character long name with 25 elements, name does not have to be unique
-a:51:{ = array with 51 elements
-N = null? found stuff like s:4:"turn";N;
+- string `s:5:"units"` 5 is length of string excluding quotation marks, then the string in quotation
+- integer `i:8000` an integer with value 8000
+- float `d:4.4000000000000004` 64 bit float
+- object `O:8:"awbwUnit":25:{` object with 8 character long name with 25 elements, name does not have to be unique
+- array `a:51:{` array with 51 elements
+- null? `N` or some sort of falsey value found stuff like `s:4:"turn";N;`
 
 ### examples
 
@@ -30,10 +30,14 @@ an array with 5 character long name "units" and 51 elements.
 element (index) 0 of array is an object with 8 character long name and 25 elements
 then a list of key value pairs, i:1;O8 ... etc.
 
+---
+
 ```
 s:2:"id";i:64305958;
 ```
 key with 2 character long name and integer value 64305958
+
+---
 
 example object:
 ```
@@ -65,8 +69,3 @@ O:8:"awbwUnit":25:{
     s:7:"carried";s:1:"N";
 }
 ```
-
-### beeeg josh
-
-format of each turn, stored in one gigantic object blob on each line. todo write parser for this format
-
