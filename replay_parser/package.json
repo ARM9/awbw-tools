@@ -2,11 +2,11 @@
   "name": "awbw_replay_parser",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "replay_parser.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node replay_parser.js",
     "build": "jison parser.jison -o parser.js",
-    "test": "node index.js replays/turn1_agame.txt"
+    "test": "node replay_parser.js replays/turn1_agame.txt"
   },
   "author": "",
   "license": "ISC",
