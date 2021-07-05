@@ -1,7 +1,7 @@
 const fs = require('fs'),
       path = require('path'),
       jison = require('jison'),
-      parser = require('./index.js'),
+      parser = require('./replay_parser.js'),
       zlib = require('zlib'),
       util = require('util');
 
