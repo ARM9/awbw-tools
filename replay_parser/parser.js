@@ -75,7 +75,7 @@ var parser = (function(){
 var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[1,17],$V3=[2,11],$V4=[1,28],$V5=[13,25],$V6=[13,27];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"GapeAndVape":3,"replay":4,"EOF":5,"object_t":6,"O:":7,"INT":8,":":9,"STRING":10,"{":11,"kvPairs":12,"}":13,"array_t":14,"a:":15,"arrayElements":16,"arrayElement":17,"integer_t":18,"kvPair":19,"kvPairs_fuck_recursion":20,"string_t":21,"value":22,"nil_t":23,"float_t":24,"s:":25,";":26,"i:":27,"d:":28,"FLOAT":29,"NULL":30,"$accept":0,"$end":1},
+symbols_: {"error":2,"ParseReplay":3,"replay":4,"EOF":5,"object_t":6,"O:":7,"INT":8,":":9,"STRING":10,"{":11,"kvPairs":12,"}":13,"array_t":14,"a:":15,"arrayElements":16,"arrayElement":17,"integer_t":18,"kvPair":19,"kvPairs_fuck_recursion":20,"string_t":21,"value":22,"nil_t":23,"float_t":24,"s:":25,";":26,"i:":27,"d:":28,"FLOAT":29,"NULL":30,"$accept":0,"$end":1},
 terminals_: {2:"error",5:"EOF",7:"O:",8:"INT",9:":",10:"STRING",11:"{",13:"}",15:"a:",25:"s:",26:";",27:"i:",28:"d:",29:"FLOAT",30:"NULL"},
 productions_: [0,[3,2],[4,1],[4,2],[6,10],[14,6],[16,1],[16,2],[17,2],[12,2],[20,2],[20,0],[19,2],[22,1],[22,1],[22,1],[22,1],[22,1],[21,5],[18,3],[24,3],[24,3],[23,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
@@ -93,10 +93,10 @@ case 3: case 7:
 this.$ = $$[$0-1].concat($$[$0]);
 break;
 case 4:
-this.$ = {type: 'object', name: $$[$0-6], body: $$[$0-1]};
+this.$ = {key: $$[$0-6], type: 'object', value: $$[$0-1]};
 break;
 case 5:
-this.$ = {type: 'array', body: $$[$0-1]};
+this.$ = {type: 'array', value: $$[$0-1]};
 break;
 case 8:
 this.$ = $$[$0];
@@ -105,7 +105,7 @@ case 9: case 10:
 a = [$$[$0-1]]; if($$[$0]) a=a.concat($$[$0]); this.$ = a;
 break;
 case 12:
-this.$ = {key: $$[$0-1].value, value: $$[$0]};
+this.$ = {key: $$[$0-1].value, type: $$[$0].type, value: $$[$0].value};
 break;
 case 18:
 this.$ = {type: 'string', value: $$[$0-1].slice(1,-1)};

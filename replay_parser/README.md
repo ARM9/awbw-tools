@@ -1,5 +1,20 @@
 # awbw replay parser
 
+### usage
+
+from js
+```
+const fs = require('fs'),
+      parser = require('./replay_parser.js');
+
+let input = fs.readFileSync(process.argv.slice(2)),
+    tree = parser.parse(input);
+```
+
+from command line
+```
+node main.js replay > out.txt
+```
 
 # awbw replay format
 
@@ -14,8 +29,8 @@ one of my older replays (2018) is missing the first turn of the first day for so
 - string `s:5:"units"` 5 is length of string excluding quotation marks, then the string in quotation
 - integer `i:8000` an integer with value 8000
 - float `d:4.4000000000000004` 64 bit float
-- object `O:8:"awbwUnit":25:{` object with 8 character long name with 25 elements, name does not have to be unique
-- array `a:51:{` array with 51 elements
+- object `O:8:"awbwUnit":25:{` object with 8 character long name and 25 elements, name does not have to be unique
+- array `a:51:{` array with 51 elements, seems to only contain objects
 - null? `N` or some sort of falsey value found stuff like `s:4:"turn";N;`
 
 ### examples

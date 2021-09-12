@@ -29,11 +29,11 @@
 
 /lex
 
-%start GapeAndVape
+%start ParseReplay
 
 %%
 
-GapeAndVape
+ParseReplay
     : replay EOF   {return $$}
     ;
 
@@ -43,11 +43,11 @@ replay
     ;
 
 object_t
-    : 'O:' INT ':' STRING ':' INT ':' '{' kvPairs '}' {$$ = {type: 'object', name: $4, body: $9};}
+    : 'O:' INT ':' STRING ':' INT ':' '{' kvPairs '}' {$$ = {key: $4, type: 'object', value: $9};}
     ;
 
 array_t
-    : 'a:' INT ':' '{' arrayElements '}'  {$$ = {type: 'array', body: $5};}
+    : 'a:' INT ':' '{' arrayElements '}'  {$$ = {type: 'array', value: $5};}
     ;
 
 arrayElements
@@ -68,7 +68,7 @@ kvPairs_fuck_recursion
     ;
 
 kvPair
-    : string_t value    {$$ = {key: $1.value, value: $2};}
+    : string_t value    {$$ = {key: $1.value, type: $2.type, value: $2.value};}
     ;
 
 value
