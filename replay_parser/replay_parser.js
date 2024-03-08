@@ -31,22 +31,33 @@ function parseActionFile (gzipped) {
     let turns = [];
     let curr_line = 1;
     let i = 0;
+    let line;
     try {
         while (i < text.length) {
-            let line = text.substring(i, text.indexOf('\n', i));
+            let lineEnd = text.indexOf('\n', i);
+            if (lineEnd === -1) {
+                lineEnd = text.length;
+            }
+            line = text.substring(i, lineEnd);
             i += line.length + 1;
             let turnHeader = line.match(/p:(\d+);d:(\d+);a:/);
             let playerId = turnHeader[1];
             let day = turnHeader[2];
             line = line.substring(turnHeader[0].length);
-            let actions = Object.values(unserialize(line)[2]).map(action => {
-                return JSON.parse(action);
+            let actions = [];
+            Object.values(unserialize(line)[2]).forEach(action => {
+                try {
+                    actions.push(JSON.parse(action));
+                } catch (e) {
+                    console.error(`Error parsing action on line ${curr_line}: ${action}`);
+                }
             });
             turns.push({playerId, day, actions});
             curr_line++;
         }
     } catch (e) {
-        e.message = `Error parsing action file at line ${curr_line}, byte ${i}\n` + text.substring(0, 100) + '\n' + e.message;
+        console.error(line.substring(0, 100));
+        e.message = `Error parsing action file at line ${curr_line}, byte ${i}\n` + text.substring(i - 10, i + 100) + '\n' + e.message;
         throw e;
     }
     return turns;
